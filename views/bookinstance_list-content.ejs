@@ -1,6 +1,7 @@
 <h1><%=title%></h1>
 <ul>
-    <% if(bookinstance_list){ %> <% for(const val of bookinstance_list) {%>
+    <% if(bookinstance_list.length > 0){ %> <% for(const val of
+    bookinstance_list) {%>
     <li>
         <a href="<%=val.url%>"><%=val.book.title%> :<%=val.imprint%> </a> - <%
         if(val.status == "Available") { %>

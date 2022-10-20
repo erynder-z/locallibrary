@@ -3,7 +3,7 @@
     <h4>Books</h4>
 </div>
 <ul>
-    <% if(genre_books){ %> <% for(const book of genre_books) {%>
+    <% if(genre_books.length > 0){ %> <% for(const book of genre_books) {%>
     <li>
         <strong><a href="<%=book.url%>"><%=book.title%></a></strong>
     </li>
