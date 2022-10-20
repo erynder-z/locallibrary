@@ -2,9 +2,7 @@
 <ul>
     <% if(author_list.length > 0){ %> <% for(const author of author_list) {%>
     <li>
-        <a href="<%=author.url%>"><%=author.name%></a> (
-        <%=author.date_of_birth_formatted%> -
-        <%=author.date_of_death_formatted%> )
+        <a href="<%=author.url%>"><%=author.name%></a> <%=author.lifespan %>
     </li>
     <% } %> <% } else{ %>
     <p>There are no authors</p>
