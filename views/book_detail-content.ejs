@@ -7,10 +7,12 @@
 <p><strong>ISBN: </strong><%=book.isbn%></p>
 <p>
     <strong>Genre: </strong>
-    <% if(book){ %> <% for(const val of book.genre) {%>
-
+    <% if(book){ %> <% for(const [i, val] of book.genre.entries()) {%> <% if (i
+    < book.genre.length-1) { %>
     <a href="<%=val.url%>"><%=val.name%>,</a>
-    <% } %>
+    <% } else { %>
+    <a href="<%=val.url%>"><%=val.name%></a>
+    <% } %> <% } %>
 </p>
 
 <div style="margin-left: 20px; margin-top: 20px">
