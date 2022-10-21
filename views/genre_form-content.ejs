@@ -1,0 +1,19 @@
+<h1><%=title %></h1>
+<form method="post" action="">
+    <div class="form-group">
+        <label for="name">Genre: </label>
+        <!-- prettier-ignore -->
+        <input id="name" class="form-control" type="text" placeholder="Fantasy, Poetry etc."
+        name="name" value="<% if (typeof genre == "undefined") { %>''<% } else { %><%=genre.name %><% } %>" />
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (typeof errors != 'undefined') { %>
+<ul>
+    <% for(const error of errors) {%>
+    <li><%=error.msg%></li>
+
+    <% } %>
+</ul>
+<% } %>
