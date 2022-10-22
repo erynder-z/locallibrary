@@ -4,7 +4,7 @@
         <label for="name">Genre: </label>
         <!-- prettier-ignore -->
         <input id="name" class="form-control" type="text" placeholder="Fantasy, Poetry etc."
-        name="name" value="<% if (typeof genre == "undefined") { %>''<% } else { %><%=genre.name %><% } %>" />
+        name="name" value="<% if (typeof genre == "undefined") { %><% } else { %><%=genre.name %><% } %>" />
     </div>
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
