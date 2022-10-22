@@ -1,0 +1,36 @@
+<h1><%= title %></h1>
+
+<form action="" method="post">
+    <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <!-- prettier-ignore -->
+        <input id="first_name" class="form-control" type="text"
+        placeholder="First name" name="first_name" required="true"
+        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.first_name %><% } %>" />
+        <label for="family_name">Family Name:</label>
+        <!-- prettier-ignore -->
+        <input id="family_name" class="form-control" type="text"
+        placeholder="Family name" name="family_name" required="true"
+        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.family_name %><% } %>" />
+    </div>
+    <div class="form-group">
+        <label for="date_of_birth">Date of birth:</label>
+        <!-- prettier-ignore -->
+        <input id="date_of_birth" class="form-control" type="date" name="date_of_birth"
+        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.date_of_birth %><% } %>" />
+        <label for="date_of_birth">Date of death:</label>
+        <!-- prettier-ignore -->
+        <input id="date_of_death" class="form-control" type="date" name="date_of_death"
+        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.date_of_death %><% } %>" />
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (typeof errors != 'undefined') { %>
+<ul>
+    <% for(const error of errors) {%>
+    <li><%=error.msg%></li>
+
+    <% } %>
+</ul>
+<% } %>
