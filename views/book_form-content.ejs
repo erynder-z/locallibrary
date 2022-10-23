@@ -18,11 +18,10 @@
         <% for(const author of authors) {%>
             <% if (typeof book != "undefined") { %>
         <option
-            value="author._id"
+            value="<%= author._id  %>"
             selected="<% author._id.toString()===book.author._id.toString() ? 'selected' : false %> "
         >
             <%= author.name %>
-        </option>
         <% } else {%>
         <option value="<%=author.id %> "><%=author.name %></option>
         <% } %> <% } %>
