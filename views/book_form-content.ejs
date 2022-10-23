@@ -6,14 +6,14 @@
         <input id="title" class="form-control" type="text" placeholder="Name of book" name="title" required="true"  
         value="<% if (typeof book == "undefined") { %><% } else { %><%=book.first_name %><% } %>" />
     </div>
+
     <div class="form-group">
         <label for="author">Author:</label>
         <!-- prettier-ignore -->
         <select id="author" class="form-control" type="select" placeholder="Select author" name="author" required="true">
-
         <% authors.sort(function(a, b) {let textA = a.family_name.toUpperCase();
-        let textB = b.family_name.toUpperCase(); /* prettier-ignore */ return
-        (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}); %>
+        let textB = b.family_name.toUpperCase(); 
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}); %>
         <!-- prettier-ignore -->
         <% for(const author of authors) {%>
             <% if (typeof book != "undefined") { %>
