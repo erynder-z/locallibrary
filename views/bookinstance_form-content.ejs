@@ -1,0 +1,63 @@
+<h1><%= title %></h1>
+<form action="" method="post">
+    <div class="form-group">
+        <label for="book">Book:</label>
+        <!-- prettier-ignore -->
+        <select id="book" class="form-control" type="select" placeholder="Select book" name="book" required="true">
+        <% book_list.sort(function(a, b) {let textA = a.title.toUpperCase();
+        let textB = b.title.toUpperCase(); 
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}); %>
+        <% for(const book of book_list) {%>
+            <% if (typeof book != "undefined") { %>
+        <option
+            value="<%=book._id %>"
+            selected="<% if (typeof selected_book != "undefined" && selected_book == book._id.toString()) {  %>
+                'selected' 
+                <% } else { %>
+                             <% false %>
+                       <% } %>" >
+            <%= book.title %>
+        <% } %> <% } %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="imprint">Imprint:</label>
+        <!-- prettier-ignore -->
+        <input id="imprint" class="form-control" type="text" placeholder="Publisher and date information" name="imprint" required="true" 
+               value="<% if (typeof bookinstance == "undefined") { %><% } else { %><%=bookinstance.imprint %><% } %>">
+    </div>
+
+    <div class="form-group">
+        <label for="due_back">Date when book available:</label>
+        <!-- prettier-ignore -->
+        <input id="due_back" class="form-control" type="date" name="due_back"  
+               value="<% if (typeof bookinstance == "undefined") { %><% } else { %><%=bookinstance.due_back %><% } %>">
+    </div>
+
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select
+            id="status"
+            class="form-control"
+            placeholder="Select status"
+            name="status"
+            required="true"
+        >
+            <option value="Mainternance">Mainternance</option>
+            <option value="Available">Available</option>
+            <option value="Loaned">Loaned</option>
+            <option value="Reserved">Reserved</option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (typeof errors != 'undefined') { %>
+<ul>
+    <% for(const error of errors) {%>
+    <li><%=error.msg%></li>
+
+    <% } %>
+</ul>
+<% } %>
