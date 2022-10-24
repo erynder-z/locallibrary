@@ -1,0 +1,34 @@
+<h1><%= title %>: <%= genre.name %></h1>
+
+<% if ( genre_books.length > 0) { %>
+<p>
+    <strong
+        >Delete the following books before attempting to delete this
+        genre.</strong
+    >
+</p>
+<div style="margin-left: 20px; margin-top: 20px">
+    <h4>Books</h4>
+    <% for(const book of genre_books) {%>
+    <li>
+        <a href="<%=book.url%>"><%=book.title%></a>
+        <p><%= book.summary %></p>
+    </li>
+    <% } %>
+</div>
+<% } else { %>
+<p><strong>Do you really want to delete this Genre?</strong></p>
+<form action="" method="post">
+    <div class="form-group">
+        <input
+            id="genreid"
+            class="form-control"
+            type="hidden"
+            name="genreid"
+            required="true"
+            value="genre._id"
+        />
+    </div>
+    <button class="btn btn-primary" type="submit">Delete</button>
+</form>
+<% } %>
