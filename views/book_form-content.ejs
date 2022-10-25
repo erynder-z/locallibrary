@@ -19,7 +19,7 @@
             <% if (typeof book != "undefined") { %>
         <option
             value="<%= author._id  %>"
-            selected="<% author._id.toString()===book.author._id.toString() ? 'selected' : false %> "
+            selected="<%  author._id.toString()==book.author._id || author._id.toString()===book.author._id.toString() ? 'selected' : false %> "
         >
             <%= author.name %>
         <% } else {%>
