@@ -3,14 +3,9 @@
 <p><strong>Do you really want to delete this bookinstance?</strong></p>
 <form action="" method="post">
     <div class="form-group">
-        <input
-            id="book_instance_id"
-            class="form-control"
-            type="hidden"
-            name="book_instance_id"
-            required="true"
-            value="book_instance._id"
-        />
+        <input id="<%= book_instance._id %>" class="form-control" type="hidden"
+        name="<%= book_instance._id %>"" required="true" value="<%=
+        book_instance._id %>" />
     </div>
     <button class="btn btn-primary" type="submit">Delete</button>
 </form>
