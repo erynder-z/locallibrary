@@ -145,20 +145,20 @@ exports.bookinstance_delete_post = (req, res, next) => {
 };
 
 // Display BookInstance update form on GET.
-exports.bookinstance_update_get = function (req, res, next) {
+exports.bookinstance_update_get = (req, res, next) => {
     // Get book, authors and genres for form.
     async.parallel(
         {
-            bookinstance: function (callback) {
+            bookinstance(callback) {
                 BookInstance.findById(req.params.id)
                     .populate('book')
                     .exec(callback);
             },
-            books: function (callback) {
+            books(callback) {
                 Book.find(callback);
             },
         },
-        function (err, results) {
+        (err, results) => {
             if (err) {
                 return next(err);
             }
