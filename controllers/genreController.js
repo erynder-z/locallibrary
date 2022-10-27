@@ -169,11 +169,71 @@ exports.genre_delete_post = (req, res, next) => {
 };
 
 // Display Genre update form on GET.
-exports.genre_update_get = (req, res) => {
-    res.send('NOT IMPLEMENTED: Genre update GET');
+exports.genre_update_get = (req, res, next) => {
+    // Get book, authors and genres for form.
+    async.parallel(
+        {
+            genre(callback) {
+                Genre.findById(req.params.id).exec(callback);
+            },
+            genre_books(callback) {
+                Book.find({ genre: req.params.id }).exec(callback);
+            },
+        },
+        (err, results) => {
+            if (err) {
+                return next(err);
+            }
+            if (results.genre == null) {
+                // No results.
+                const err = new Error('Genre not found');
+                err.status = 404;
+                return next(err);
+            }
+            // Success.
+            res.render('genre_form', {
+                title: 'Update Genre',
+                genre: results.genre,
+                genre_books: results.genre_books,
+            });
+        }
+    );
 };
 
 // Handle Genre update on POST.
-exports.genre_update_post = (req, res) => {
-    res.send('NOT IMPLEMENTED: Genre update POST');
-};
+exports.genre_update_post = [
+    // Validate and sanitize the name field.
+    body('name', 'Genre name required').trim().isLength({ min: 1 }).escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // Create a BookInstance object with escaped and trimmed data.
+        const genre = new Genre({
+            name: req.body.name,
+            _id: req.params.id, //This is required, or a new ID will be assigned!
+        });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values and error messages.
+            res.render('genre_form', {
+                title: 'Update Genre',
+                genre: genre,
+                errors: errors.array(),
+            });
+            return;
+        }
+
+        // Data from form is valid. Update the record.
+        Genre.findByIdAndUpdate(req.params.id, genre, {}, (err, thegenre) => {
+            if (err) {
+                return next(err);
+            }
+
+            // Successful: redirect to book detail page.
+            res.redirect(thegenre.url);
+        });
+    },
+];
