@@ -17,11 +17,11 @@
         <label for="date_of_birth">Date of birth:</label>
         <!-- prettier-ignore -->
         <input id="date_of_birth" class="form-control" type="date" name="date_of_birth"
-        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.date_of_birth %><% } %>" />
+        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.date_of_birth_formatted_yyyy_mm_dd %><% } %>" />
         <label for="date_of_birth">Date of death:</label>
         <!-- prettier-ignore -->
         <input id="date_of_death" class="form-control" type="date" name="date_of_death"
-        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.date_of_death %><% } %>" />
+        value="<% if (typeof author == "undefined") { %><% } else { %><%=author.date_of_death_formatted_yyyy_mm_dd %><% } %>" />
     </div>
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
