@@ -32,7 +32,7 @@
         <input id="due_back" class="form-control" type="date" name="due_back"  
                value="<% if (typeof bookinstance == "undefined") { %><% } else { %><%=bookinstance.due_back_yyyy_mm_dd %><% } %>">
     </div>
-
+    <!-- prettier-ignore -->
     <div class="form-group">
         <label for="status">Status:</label>
         <select
@@ -42,18 +42,18 @@
             name="status"
             required="true"
         >
-            <option value="Mainternance"  <% if (bookinstance.status == "Mainternance") {  %>
+            <option value="Mainternance"  <% if (typeof bookinstance != "undefined" && bookinstance.status == "Mainternance") {  %>
                 selected
-                <% } %>>Mainternance</option>
-            <option value="Available" <% if (bookinstance.status == "Available") {  %>
+                <% } %>>Mainternance
+            <option value="Available" <% if (typeof bookinstance != "undefined" && bookinstance.status == "Available") {  %>
                 selected
-                <% } %>>Available</option>
-            <option value="Loaned" <% if (bookinstance.status == "Loaned") {  %>
+                <% } %>>Available
+            <option value="Loaned" <% if (typeof bookinstance != "undefined" && bookinstance.status == "Loaned") {  %>
                 selected
-                <% } %>>Loaned</option>
-            <option value="Reserved" <% if (bookinstance.status == "Reserved") {  %>
+                <% } %>>Loaned
+            <option value="Reserved" <% if (typeof bookinstance != "undefined" && bookinstance.status == "Reserved") {  %>
                 selected
-                <% } %>>Reserved</option>
+                <% } %>>Reserved
         </select>
     </div>
     <button class="btn btn-primary" type="submit">Submit</button>
