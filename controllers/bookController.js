@@ -204,9 +204,12 @@ exports.book_delete_get = (req, res, next) => {
     async.parallel(
         {
             book(callback) {
-                Book.findById(req.params.id).exec(callback);
+                Book.findById(req.params.id)
+                    .populate('author')
+                    .populate('genre')
+                    .exec(callback);
             },
-            book_instances(callback) {
+            book_bookinstances(callback) {
                 BookInstance.find({ book: req.params.id }).exec(callback);
             },
         },
@@ -222,7 +225,7 @@ exports.book_delete_get = (req, res, next) => {
             res.render('book_delete', {
                 title: 'Delete Book',
                 book: results.book,
-                book_instances: results.book_instances,
+                book_instances: results.book_bookinstances,
             });
         }
     );
@@ -232,10 +235,13 @@ exports.book_delete_get = (req, res, next) => {
 exports.book_delete_post = (req, res, next) => {
     async.parallel(
         {
-            author(callback) {
-                Book.findById(req.body.bookid).exec(callback);
+            book(callback) {
+                Book.findById(req.body.bookid)
+                    .populate('author')
+                    .populate('genre')
+                    .exec(callback);
             },
-            authors_books(callback) {
+            book_bookinstances(callback) {
                 BookInstance.find({ book: req.body.bookid }).exec(callback);
             },
         },
@@ -244,12 +250,12 @@ exports.book_delete_post = (req, res, next) => {
                 return next(err);
             }
             // Success
-            if (results.bookInstances.length > 0) {
+            if (results.book_bookinstances.length > 0) {
                 // No bookinstances found for this book. Render in same way as for GET route.
                 res.render('book_delete', {
                     title: 'Delete Book',
                     book: results.book,
-                    bookInstances: results.book_instance,
+                    bookInstances: results.book_bookinstances,
                 });
                 return;
             }
